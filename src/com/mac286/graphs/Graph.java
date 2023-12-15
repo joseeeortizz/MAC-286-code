@@ -24,7 +24,7 @@ public class Graph {
     public void addEdge(String src, String dst) {
         //get the adjacency list of the src
         ArrayList<String> L = G.get(src);
-        if(L == null) {
+        if (L == null) {
             //this is the first time we discovering src. Create an adjacency list for it and increase the size of
             //the number of vertices
             L = new ArrayList<String>();
@@ -32,9 +32,9 @@ public class Graph {
             //add the list tot he map
             G.put(src, L);
             size++;
-        }else {
+        } else {
             //the src has been already discovered
-            if(L.contains(dst)) {
+            if (L.contains(dst)) {
                 //we are trying to add dst twice, don't do it
                 System.out.println("Trying to add " + dst + " twice!!!");
                 return;
@@ -44,7 +44,7 @@ public class Graph {
         }
         //check if we have already discovered the dst.
         L = G.get(dst);
-        if(L == null) {
+        if (L == null) {
             //this is the first time we discover dst, create an adjacency list and add it
             L = new ArrayList<String>();
             L.add(src);
@@ -53,7 +53,7 @@ public class Graph {
             size++;
         } else { //it's already discovered
             //check if src is already in the adjacency list of dst, if not add it
-            if(!L.contains(src)) {
+            if (!L.contains(src)) {
                 L.add(src);
             }
         }
@@ -67,16 +67,16 @@ public class Graph {
         Stack<String> S = new Stack<String>();
         //push src into the stack
         S.push(src);
-        while(!S.isEmpty()) {
+        while (!S.isEmpty()) {
             //pop from the stack
             String temp = S.pop();
-            if(!visited.contains(temp)) {
+            if (!visited.contains(temp)) {
                 //add it to the visited
                 visited.add(temp);
                 //add all non visited neighbors of temp to the stack
                 ArrayList<String> adj = G.get(temp);
-                for(int i = 0; i < adj.size(); i++) {
-                    if(!visited.contains(adj.get(i))) {
+                for (int i = 0; i < adj.size(); i++) {
+                    if (!visited.contains(adj.get(i))) {
                         //push it to the stack
                         S.push(adj.get(i));
                     }
@@ -95,11 +95,11 @@ public class Graph {
         //visit src and add it to the queue
         visited.add(src);
         Q.add(src);
-        while(!Q.isEmpty()) {
+        while (!Q.isEmpty()) {
             String temp = Q.remove();
             ArrayList<String> adj = G.get(temp);
-            for(int i = 0; i < adj.size(); i++) {
-                if(!visited.contains(adj.get(i))) {
+            for (int i = 0; i < adj.size(); i++) {
+                if (!visited.contains(adj.get(i))) {
                     //visit it
                     visited.add(adj.get(i));
                     //add it to the queue
@@ -119,7 +119,7 @@ public class Graph {
         //push the src into the stack
         Visited.add(src);
         S.push(src);
-        while(!S.isEmpty()) {
+        while (!S.isEmpty()) {
             //as long as the stack is not empty
             //pop from the stack
             String current = S.peek();
@@ -127,24 +127,25 @@ public class Graph {
             String v = null;
             ArrayList<String> adj = G.get(current);
             Iterator<String> it = adj.iterator();
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                 String t = it.next();
-                if(!Visited.contains(t)) {
+                if (!Visited.contains(t)) {
                     v = t;
                     break; //get out of the loop
                 }
             }
-            if(v == null) {
+            if (v == null) {
                 //no adjacent node to current is unvisited
                 S.pop();
-            }else {
+            } else {
                 Visited.add(v);
                 S.push(v);
-                st += "("+ current + ", " + v + ")  ";
+                st += "(" + current + ", " + v + ")  ";
             }
         }
         return st;
     }
+
     public String toString() {
         String st = "";
         Set<String> S = G.keySet();
@@ -153,9 +154,9 @@ public class Graph {
             return "{}";
         //go through eash key and add the list of neighbors to the string
         Iterator<String> it = S.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             String k = it.next();
-            st += k + ": "  + G.get(k).toString() + "\n";
+            st += k + ": " + G.get(k).toString() + "\n";
         }
         return st;
     }

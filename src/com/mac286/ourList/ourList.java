@@ -12,13 +12,16 @@ public class ourList<T> {
         Head = Tail = null;
         size = 0;
     }
+
     //getter for size
     public int size() {
         return size;
     }
+
     public boolean isEmpty() {
         return (size == 0);
     }
+
     //add front adds the element to the front of the list
     public void addFront(T e) {
         //create a Node to store e
@@ -29,44 +32,47 @@ public class ourList<T> {
         //Always modify the newly created node first.
         N.setNext(Head);
         Head = N;
-        if(Tail == null) {
+        if (Tail == null) {
             //The list was empty, update tail as well
             Tail = N;
         }
     }
+
     public void addBack(T e) {
         //create a new node with e
         Node<T> N = new Node<T>(e);
         size++;
         //set next of the last to N
-        if(Tail != null)
+        if (Tail != null)
             Tail.setNext(N);
         //set Tail to N
         Tail = N;
-        if(Head == null)
+        if (Head == null)
             Head = N;
     }
+
     //remove front
     public T removeFront() {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return null;
         //save front
         T save = Head.getData();
         size--;
         Head = Head.next();
-        if(size == 0)
+        if (size == 0)
             Head = Tail = null;
         return save;
 
     }
+
     //remove front
     public T removeBack() {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return null;
         //save the last
         T save = Tail.getData();
 
-        if(size == 1) {
+        if (size == 1) {
             Head = Tail = null;
             size = 0;
             return save;
@@ -93,27 +99,28 @@ public class ourList<T> {
 
     //elementAt(int ind) returns the element at index ind
     public T elementAt(int ind) {
-        if(this.isEmpty() || ind < 0 || ind > size -1)
+        if (this.isEmpty() || ind < 0 || ind > size - 1)
             return null;
         //create a temporary reference to go through the list
         Node<T> temp = Head;
-        for(int i = 0; i < ind; i++)
+        for (int i = 0; i < ind; i++)
             temp = temp.next();
         //At the end of the loop temp should refer to the node at index ind
         return temp.getData();
     }
+
     //add at specific index adds e at index ind. first is index 0 and last
     //is index size - 1
     public void add(int ind, T e) {
-        if(ind < 0 || ind > size) {
+        if (ind < 0 || ind > size) {
             throw new IndexOutOfBoundsException();
         }
         //deal with index0 separately
-        if(ind == 0) {
+        if (ind == 0) {
             this.addFront(e);
             return;
         }
-        if(ind == size) {
+        if (ind == size) {
             this.addBack(e);
             return;
         }
@@ -123,7 +130,7 @@ public class ourList<T> {
         Node<T> N = new Node<T>(e);
         //2- Go to node at index ind-1 call it temp
         Node<T> temp = Head;
-        for(int i =0; i < ind-1; i++)
+        for (int i = 0; i < ind - 1; i++)
             temp = temp.next();
         //3- change links of new node. Set next of new Node to temp.next()
         N.setNext(temp.next());
@@ -132,17 +139,18 @@ public class ourList<T> {
 
         size++;
     }
+
     //remove at specific index
     public T remove(int ind) {
-        if(this.isEmpty() || ind < 0 || ind > size-1)
+        if (this.isEmpty() || ind < 0 || ind > size - 1)
             return null;
-        if(ind == 0)
+        if (ind == 0)
             return this.removeFront();
-        if(ind == size-1)
+        if (ind == size - 1)
             return this.removeBack();
         //go to index ind-1
         Node<T> temp = Head;
-        for(int i =0; i < ind-1; i++)
+        for (int i = 0; i < ind - 1; i++)
             temp = temp.next();
         //save the data to return
         T save = temp.next().getData();
@@ -151,12 +159,13 @@ public class ourList<T> {
         size--;
         return save;
     }
+
     public String toString() {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return "[]";
         String st = "[";
         Node<T> temp = Head;
-        while(temp.next() != null) {
+        while (temp.next() != null) {
             st += temp.toString() + ", ";
             temp = temp.next();
         }

@@ -10,7 +10,7 @@ package com.mac286.stack;
  *
  *
  */
-public class ourStack <T>{
+public class ourStack<T> {
 
     //reference to an array of Ts
     private T[] S;
@@ -22,6 +22,7 @@ public class ourStack <T>{
         S = (T[]) new Object[10];
         size = 0;
     }
+
     //getter for size
     public int size() {
         return size;
@@ -34,45 +35,49 @@ public class ourStack <T>{
 
     //push method if full resize, use the same resize method as the one on ourVector
     public void push(T e) {
-        if(size >= S.length) {
+        if (size >= S.length) {
             resize();
         }
         S[size] = e;
         size++;
     }
+
     //pop remove top and return it, if empty return null.
     public T pop() {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return null;
-        T save = S[size  -1];
+        T save = S[size - 1];
         size--;
         return save;
     }
+
     //peek return the top without removing it.
     public T peek() {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return null;
-        return S[size -1];
+        return S[size - 1];
     }
+
     private void resize() {
         //create a bigger array, say capacity of the old one + 10 name it temp
         @SuppressWarnings("unchecked")
-        T[] temp = (T[])new Object[S.length + 10];
+        T[] temp = (T[]) new Object[S.length + 10];
         //copy the all the old array into the new one.
-        for(int i =0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             temp[i] = S[i];
         }
         //update old Array to new one
         S = temp;
     }
+
     public String toString() {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return "[]";
         String st = "[";
-        for(int i = 0; i < size-1; i++) {
+        for (int i = 0; i < size - 1; i++) {
             st += S[i].toString() + ", ";
         }
-        st += S[size-1] + "]";
+        st += S[size - 1] + "]";
         return st;
     }
 }

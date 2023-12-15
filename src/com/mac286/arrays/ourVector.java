@@ -1,4 +1,5 @@
 package com.mac286.arrays;
+
 /*
  * Design a class ourVector that mimics Vector class in java.
  * You class must have the following:
@@ -36,21 +37,25 @@ public class ourVector {
         A = new int[capacity];
         size = 0;
     }
+
     //getter for size
     public int size() {
         return size;
     }
+
     public int capacity() {
         return A.length;
     }
+
     public boolean isEmpty() {
-        if(size == 0)
+        if (size == 0)
             return true;
         return false;
     }
+
     //add method that adds an element to the back
     public void add(int e) {
-        if(size >= A.length) {
+        if (size >= A.length) {
             resize();
         }
         A[size] = e;
@@ -58,7 +63,7 @@ public class ourVector {
     }
 
     public int removeBack() {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             System.out.println("Vector is empty");
             return -1;
         }
@@ -72,15 +77,15 @@ public class ourVector {
     }
 
     public int removeFront() {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             System.out.println("Vector is empty");
             return -1;
         }
         //save the first element
         int save = A[0];
         //bring down all element by one
-        for(int i = 0; i <size-1; i++) {
-            A[i] = A[i+1];
+        for (int i = 0; i < size - 1; i++) {
+            A[i] = A[i + 1];
         }
         //decrease the size
         size--;
@@ -89,19 +94,19 @@ public class ourVector {
     }
 
     public int remove(int index) {
-        if(this.isEmpty()) {
+        if (this.isEmpty()) {
             System.out.println("Vector is empty");
             return -1;
         }
-        if(index < 0 || index >= size) {
+        if (index < 0 || index >= size) {
             System.out.println("Invalid index");
             return -1;
         }
         //save A[index]
         int save = A[index];
         //bring all elements starting at index down by one
-        for(int i = index; i <size-1; i++) {
-            A[i] = A[i+1];
+        for (int i = index; i < size - 1; i++) {
+            A[i] = A[i + 1];
         }
         //decrease size
         size--;
@@ -110,42 +115,44 @@ public class ourVector {
     }
 
     public void add(int index, int e) {
-        if(size >= A.length) {
+        if (size >= A.length) {
             resize();
         }
-        if(index < 0 || index > size) {
+        if (index < 0 || index > size) {
             System.out.println("Invalid index");
             return;
         }
 
         //push up by one all elements starting at size-1 DOWN to index
-        for(int i = size; i > index; i--) {
-            A[i] = A[i-1];
+        for (int i = size; i > index; i--) {
+            A[i] = A[i - 1];
         }
         //add e at index
-        A[index]  = e;
+        A[index] = e;
         //increase the size
         size++;
     }
+
     //HW
     private void resize() {
         //create a bigger array, say capacity of the old one + 10 name it temp
         int[] temp = new int[A.length + 10];
         //copy the all the old array into the new one.
-        for(int i =0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             temp[i] = A[i];
         }
         //update old Array to new one
         A = temp;
     }
+
     public String toString() {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return "[]";
         String st = "[";
-        for(int i = 0; i < size-1; i++) {
+        for (int i = 0; i < size - 1; i++) {
             st += A[i] + ", ";
         }
-        st += A[size-1] + "]";
+        st += A[size - 1] + "]";
         return st;
     }
 }

@@ -21,19 +21,19 @@ public class hashtableTester {
 		System.out.println("H: " + H);
 		*/
         ChainHashtable<Integer, String> H = new ChainHashtable<Integer, String>(13);
-        H.put(18,  "fgh");
-        H.put(41,  "fhgjgh");
-        H.put(22,  "fvadgh");
-        H.put(44,  "dgdgq");
-        H.put(59,  "dfdfgh");
-        H.put(32,  "fvbngh");
-        H.put(31,  "fgghnadgh");
-        H.put(73,  "fgcbdfbvh");
+        H.put(18, "fgh");
+        H.put(41, "fhgjgh");
+        H.put(22, "fvadgh");
+        H.put(44, "dgdgq");
+        H.put(59, "dfdfgh");
+        H.put(32, "fvbngh");
+        H.put(31, "fgghnadgh");
+        H.put(73, "fgcbdfbvh");
         System.out.println("H: " + H);
         System.out.println("value at 31: " + H.get(31));
-        System.out.println("removing 44: " + H.delete(44) );
+        System.out.println("removing 44: " + H.delete(44));
         System.out.println("H: " + H);
-        System.out.println("removing 44: " + H.delete(44) );
+        System.out.println("removing 44: " + H.delete(44));
         System.out.println("H: " + H);
 
     }

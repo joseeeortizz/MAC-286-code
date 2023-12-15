@@ -13,46 +13,53 @@ public class Postfix {
         infix = new wQueue<String>();
         postfix = new wQueue<String>();
     }
+
     public String getExpression() {
         return expression;
     }
+
     public void setExpression(String expression) {
         this.expression = expression;
     }
+
     public wQueue<String> getInfix() {
         return infix;
     }
+
     public wQueue<String> getPostfix() {
         return postfix;
     }
+
     public void generateInfix() {
         //example expression"  "(  34.2*3.2 - 3.8)  / (43 * 2.5/34 - 6.1) "
-        for(int i = 0; i < expression.length(); i++) {
-            if(expression.charAt(i) == ')' || expression.charAt(i) == '(' || expression.charAt(i) == '+'
+        for (int i = 0; i < expression.length(); i++) {
+            if (expression.charAt(i) == ')' || expression.charAt(i) == '(' || expression.charAt(i) == '+'
                     || expression.charAt(i) == '-' || expression.charAt(i) == '*' ||
-                    expression.charAt(i) == '/' ) {
-                infix.add(""+expression.charAt(i));
+                    expression.charAt(i) == '/') {
+                infix.add("" + expression.charAt(i));
             }
-            if(expression.charAt(i) == ' ')
+            if (expression.charAt(i) == ' ')
                 continue;
-            if(expression.charAt(i) == '.' || Character.isDigit(expression.charAt(i))){
+            if (expression.charAt(i) == '.' || Character.isDigit(expression.charAt(i))) {
                 int count = 1;
-                while(i+count < expression.length() && (Character.isDigit(expression.charAt(i+count)) || expression.charAt(i+count) == '.'))
+                while (i + count < expression.length() && (Character.isDigit(expression.charAt(i + count)) || expression.charAt(i + count) == '.'))
                     count++;
-                String operand = expression.substring(i, i+count);
+                String operand = expression.substring(i, i + count);
                 infix.add(operand);
                 i = i + count - 1;
             }
         }
     }
+
     //returns true if first is higher or equal precedence than second
     private boolean isHigherPrecedence(String first, String second) {
-        if(first.equals("*") || first.equals("/") )
+        if (first.equals("*") || first.equals("/"))
             return true;
-        if(second.equals("-") || second.equals("+") )
+        if (second.equals("-") || second.equals("+"))
             return true;
         return false;
     }
+
     public void generatePostFix() {
         /*Rules to generate postfix
          * 1- if '(', push to stack
@@ -67,14 +74,14 @@ public class Postfix {
          *
          */
         wStack<String> S = new wStack<String>();
-        while(!infix.isEmpty()) {
-            if(infix.peek().equals("(")) {
+        while (!infix.isEmpty()) {
+            if (infix.peek().equals("(")) {
                 S.push(infix.remove());
-            } else if(infix.peek().equals(")")) {
-                while(!S.isEmpty()&&!S.peek().equals("(")) {
+            } else if (infix.peek().equals(")")) {
+                while (!S.isEmpty() && !S.peek().equals("(")) {
                     postfix.add(S.pop());
                 }
-                if(S.isEmpty()) {
+                if (S.isEmpty()) {
                     System.out.println("Something is wrong with expression!");
                     return;
                 } else {
@@ -84,10 +91,10 @@ public class Postfix {
                     infix.remove();
                 }
             } else if (isOperator(infix.peek())) {
-                if(S.isEmpty() || !isOperator(S.peek())) {
+                if (S.isEmpty() || !isOperator(S.peek())) {
                     S.push(infix.remove());
                 } else {
-                    while(isOperator(S.peek()) && isHigherPrecedence(S.peek(), infix.peek() ))
+                    while (isOperator(S.peek()) && isHigherPrecedence(S.peek(), infix.peek()))
                         postfix.add(S.pop());
                     //push the operator to the stack
                     S.push(infix.remove());
@@ -99,13 +106,13 @@ public class Postfix {
             }
         }
         //empty the stack into the postfix
-        while(!S.isEmpty()) {
+        while (!S.isEmpty()) {
             postfix.add(S.pop());
         }
     }
 
     private boolean isOperator(String s) {
-        if(s.equals("+") || s.equals("-") ||s.equals("*") ||s.equals("/"))
+        if (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/"))
             return true;
         return false;
     }
@@ -116,13 +123,13 @@ public class Postfix {
         wStack<String> S = new wStack<String>();
         //As long as the postfix queue is not empty
 
-        while(!postfix.isEmpty()) {
+        while (!postfix.isEmpty()) {
             //remove from postfix,
             String temp = postfix.remove();
             //if operand push to stack
-            if(!isOperator(temp)) {
+            if (!isOperator(temp)) {
                 S.push(temp);
-            }else {
+            } else {
                 //if operator, then pop from stacj two operands, perform the operation
 
                 //pop the second operand
@@ -131,14 +138,14 @@ public class Postfix {
                 double first = Double.parseDouble(S.pop());
                 //perform the operation
                 //and push the result back to the stack.
-                if(temp.equals("+")) {
-                    S.push(""+(first+second));
-                } else if(temp.equals("-")) {
-                    S.push(""+(first-second));
-                } else if(temp.equals("*")) {
-                    S.push(""+(first*second));
-                } else if(temp.equals("/")) {
-                    S.push(""+(first/second));
+                if (temp.equals("+")) {
+                    S.push("" + (first + second));
+                } else if (temp.equals("-")) {
+                    S.push("" + (first - second));
+                } else if (temp.equals("*")) {
+                    S.push("" + (first * second));
+                } else if (temp.equals("/")) {
+                    S.push("" + (first / second));
                 } else {
                     System.out.println("Aomething is wrong! Maybe wrong operator");
                 }

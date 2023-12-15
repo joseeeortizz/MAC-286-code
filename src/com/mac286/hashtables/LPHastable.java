@@ -1,30 +1,37 @@
 package com.mac286.hashtables;
 
-public class LPHashtable <K, V>{
+public class LPHashtable<K, V> {
 
-    private class Node<K, V>{
-        private K  key;
+    private class Node<K, V> {
+        private K key;
         private V mData;
+
         public K getKey() {
             return key;
         }
+
         public void setKey(K key) {
             this.key = key;
         }
+
         public V getmData() {
             return mData;
         }
+
         public void setmData(V mData) {
             this.mData = mData;
         }
+
         public Node() {
-            key 	= null;
-            mData	= null;
+            key = null;
+            mData = null;
         }
+
         public Node(K k, V v) {
-            key 	= k;
-            mData	= v;
+            key = k;
+            mData = v;
         }
+
         public String toString() {
             return key + "=" + mData;
         }
@@ -33,30 +40,36 @@ public class LPHashtable <K, V>{
     Node<K, V>[] H;
     private int size;
     private float loadFactor = 0.75f;
+
     public LPHashtable() {
         H = new Node[100];
         size = 0;
         loadFactor = 0.75f;
     }
+
     public LPHashtable(int c) {
         H = new Node[c];
         size = 0;
         loadFactor = 0.75f;
     }
+
     public LPHashtable(int c, float l) {
         H = new Node[c];
         size = 0;
         loadFactor = l;
     }
+
     public boolean isEmpty() {
         return (size == 0);
     }
+
     public int hashFunction(K k) {
         return
-                Math.abs((k.hashCode()%H.length));
+                Math.abs((k.hashCode() % H.length));
     }
+
     public void put(K k, V v) {
-        if(size == H.length) {
+        if (size == H.length) {
             System.out.println("Hashtable is full");
             return;
         }
@@ -72,10 +85,10 @@ public class LPHashtable <K, V>{
         }
         //if we are here then the index is taken.
         //Use linear probing
-        index = (index + 1)%H.length;
-        while(H[index] != null) {
+        index = (index + 1) % H.length;
+        while (H[index] != null) {
             //advance
-            index = (index + 1)%H.length;
+            index = (index + 1) % H.length;
         }
         //index is free. put n in index
         H[index] = n;
@@ -83,21 +96,21 @@ public class LPHashtable <K, V>{
     }
 
     private int find(K k) {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return -1;
         int index = hashFunction(k);
-        if(H[index].getKey().equals(k))
+        if (H[index].getKey().equals(k))
             return index;
         int j = 0;
         index++;
-        while(j < size) {
-            if(H[index] != null && H[index].getKey().equals(k))
+        while (j < size) {
+            if (H[index] != null && H[index].getKey().equals(k))
                 return index;
-            else if(H[index] != null) {
-                index = (index+ 1)%H.length;
+            else if (H[index] != null) {
+                index = (index + 1) % H.length;
                 j++;
-            }else {
-                index = (index+ 1)%H.length;
+            } else {
+                index = (index + 1) % H.length;
             }
         }
         //it's not there
@@ -105,19 +118,19 @@ public class LPHashtable <K, V>{
     }
 
     public V get(K k) {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return null;
         int ind = find(k);
-        if(ind < 0)
+        if (ind < 0)
             return null;
         return H[ind].getmData();
     }
 
     public V delete(K k) {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return null;
         int ind = find(k);
-        if(ind < 0)
+        if (ind < 0)
             return null;
         V save = H[ind].getmData();
         H[ind] = null;
@@ -127,17 +140,17 @@ public class LPHashtable <K, V>{
     }
 
     public String toString() {
-        if(this.isEmpty())
+        if (this.isEmpty())
             return "{}";
         String st = "";
         int count = 0;
-        for(int i = 0; i < H.length; i++) {
-            if(H[i] !=null) {
+        for (int i = 0; i < H.length; i++) {
+            if (H[i] != null) {
                 count++;
-                if(count < size)
-                    st += H[i].toString() +", ";
+                if (count < size)
+                    st += H[i].toString() + ", ";
                 else {
-                    st += H[i].toString() +"}";
+                    st += H[i].toString() + "}";
                     return st;
                 }
             }
