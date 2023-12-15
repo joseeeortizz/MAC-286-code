@@ -30,7 +30,5 @@ public class heapTester {
         // [1, 3, 2, 5, 4, 10, 6, 8]
         System.out.println("removing: " + PQ1.remove());
         System.out.println("PQ1: " + PQ1);
-
     }
-
 }
