@@ -1,0 +1,6 @@
+Risk,Number Trades,Number TradesLong,Number TradesShort,Winning percent,Winning percent long,Winning percent short,Average Profit,Average Profit Long,Average Profit Short,Average holding period,Average holding period Long,Average holding period Short,Average Profit per trade per day,Average Profit per trade per day Long,Average Profit per trade per day Short
+0.5,5424,2818,2606,69.985,68.24,71.873,-0.06,-0.085,-0.034,2.619,2.001,3.287,-0.023,-0.042,-0.01
+1,5424,2818,2606,56.01,55.11,56.984,0.025,0.047,0.001,4.657,4.07,5.291,0.005,0.012,0
+2,5424,2818,2606,40.524,40.809,40.215,0.022,0.066,-0.026,9.046,8.559,9.572,0.002,0.008,-0.003
+5,5424,2818,2606,24.115,25.018,23.139,0.185,0.297,0.065,20.235,22.134,18.181,0.009,0.013,0.004
+10,5424,2818,2606,17.183,18.453,15.81,0.583,0.948,0.188,37.647,40.923,34.104,0.015,0.023,0.006
